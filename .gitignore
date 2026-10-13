@@ -1,0 +1,10 @@
+build/
+build-asan/
+*.o
+*.obj
+*.exe
+heob-4.2/
+tools/
+results/plots/*.png
+results/tables/*.csv
+.vscode/

@@ -1,0 +1,49 @@
+
+cd ~/projects/SmartPointers
+
+
+сборка
+cd ~/projects/SmartPointers/build
+cmake --build .
+
+
+запуск
+cd ~/projects/SmartPointers/build
+./smart_pointers
+
+
+бенчмарки
+cd ~/projects/SmartPointers/build
+./smart_pointers_bench
+
+
+валгринд
+cd ~/projects/SmartPointers/build
+valgrind --leak-check=full --show-leak-kinds=all ./smart_pointers
+
+
+сборка асан версии
+cd ~/projects/SmartPointers
+rm -rf build-asan
+mkdir build-asan
+cd build-asan
+cmake .. -DCMAKE_CXX_COMPILER=clang++ -DCMAKE_CXX_FLAGS="-fsanitize=address,undefined -fno-omit-frame-pointer -g"
+cmake --build .
+
+проверка асан
+cd ~/projects/SmartPointers/build-asan
+./smart_pointers
+бенч под асан
+./smart_pointers_bench
+
+
+графики
+cd ~/projects/SmartPointers
+python3 scripts/plot.py
+копируем резы
+mkdir -p /mnt/d/Projects/SmartPointers/results/tables
+mkdir -p /mnt/d/Projects/SmartPointers/results/plots
+cp ~/projects/SmartPointers/results/tables/bench.csv \
+   /mnt/d/Projects/SmartPointers/results/tables/
+cp ~/projects/SmartPointers/results/plots/*.png \
+   /mnt/d/Projects/SmartPointers/results/plots/
